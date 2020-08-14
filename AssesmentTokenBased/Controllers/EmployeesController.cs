@@ -8,9 +8,9 @@ using System.Web.Http;
 
 namespace AssesmentTokenBased.Controllers
 {
-    [Authorize]
     public class EmployeesController : ApiController
     {
+        [Authorize]
         public IEnumerable<Employee> get()
         {
             using(EmployeesEntities db=new EmployeesEntities())

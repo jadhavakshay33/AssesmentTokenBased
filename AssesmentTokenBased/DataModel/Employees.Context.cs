@@ -12,6 +12,8 @@ namespace AssesmentTokenBased.DataModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EmployeesEntities : DbContext
     {
@@ -26,5 +28,19 @@ namespace AssesmentTokenBased.DataModel
         }
     
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+    
+        public virtual ObjectResult<EF_UserLogin_Result> EF_UserLogin(string userName, string password)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EF_UserLogin_Result>("EF_UserLogin", userNameParameter, passwordParameter);
+        }
     }
 }

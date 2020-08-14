@@ -10,7 +10,7 @@ namespace AssesmentTokenBased
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            //nfig.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -19,6 +19,8 @@ namespace AssesmentTokenBased
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+
         }
     }
 }
